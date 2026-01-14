@@ -1,5 +1,3 @@
-network.tf
-
 # 2. Create the VPC
 resource "aws_vpc" "main_vpc" {
   cidr_block           = "192.168.52.0/23"
