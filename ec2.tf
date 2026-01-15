@@ -7,12 +7,37 @@ data "aws_ami" "amazon_linux" {
     }
   }
 
-resource "aws_network_interface" "test_network_interface" {
-  subnet_id   = aws_subnet.public_subnet.id
-  private_ips = ["192.168.52.100"]
 
-  tags = {
-    Name = "primary_network_interface"
+resource "aws_security_group" "public_access" {
+  name        = "allow_ssh_http"
+  description = "Allow SSH and HTTP inbound traffic"
+
+  ingress {
+    from_port   = 22
+    to_port     = 22
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  ingress {
+    from_port   = 80
+    to_port     = 80
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+    
+  ingress {
+    from_port   = 443
+    to_port     = 443
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
   }
 }
 
@@ -23,9 +48,10 @@ resource "aws_instance" "test_virtual_machine" {
   tags = {
     Name = "asiwko-vm-01"
   }
-  primary_network_interface {
-    network_interface_id = aws_network_interface.test_network_interface.id
-  }
+
+  vpc_security_group_ids = [aws_security_group.public_access.id]
+  associate_public_ip_address = true
+
   depends_on = [aws_internet_gateway.igw]
 }
 
