@@ -26,6 +26,6 @@ resource "aws_instance" "test_virtual_machine" {
   primary_network_interface {
     network_interface_id = aws_network_interface.test_network_interface.id
   }
-  depends_on = [aws_internet_gateway.gw]
+  depends_on = [aws_internet_gateway.igw]
 }
 
