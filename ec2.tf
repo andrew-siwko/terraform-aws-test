@@ -24,7 +24,7 @@ resource "aws_instance" "test_virtual_machine" {
     Name = "asiwko-vm-01"
   }
   primary_network_interface {
-    network_interface_id = aws_network_interface.test.id
+    network_interface_id = aws_network_interface.test_network_interface.id
   }
   depends_on = [aws_internet_gateway.gw]
 }
