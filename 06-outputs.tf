@@ -8,9 +8,9 @@ output "asiwko-vm-id-02" {
 }
 
 output "asiwko-vm-public-ip_01" {
-  value = aws_instance.test_virtual_machine_01.*.public_ip
+  value = aws_instance.test_virtual_machine_01.public_ip
 }
 output "asiwko-vm-public-ip_02" {
-  value = aws_instance.test_virtual_machine_02.*.public_ip
+  value = aws_instance.test_virtual_machine_02.public_ip
 }
 
