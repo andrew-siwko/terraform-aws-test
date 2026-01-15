@@ -22,7 +22,7 @@ resource "aws_key_pair" "ssh_user_key" {
 # The key pulls in the key_pair above for ssh login.
 # The subnet connects the instance to the network we defined.  If we allow the default vpc
 # there is a danger that Terraform will try to delete the default VPC and fail after timing out.
-resource "aws_instance" "test_virtual_machine" {
+resource "aws_instance" "test_virtual_machine_01" {
   ami           = data.aws_ami.amazon_linux.id
   instance_type = "t3.micro"
   key_name = aws_key_pair.ssh_user_key.key_name
@@ -31,6 +31,20 @@ resource "aws_instance" "test_virtual_machine" {
 
   tags = {
     Name = "asiwko-vm-01"
+  }
+  
+  vpc_security_group_ids = [aws_security_group.public_access.id]
+  associate_public_ip_address = true
+}
+resource "aws_instance" "test_virtual_machine_02" {
+  ami           = data.aws_ami.amazon_linux.id
+  instance_type = "t3.micro"
+  key_name = aws_key_pair.ssh_user_key.key_name
+
+  subnet_id     = aws_subnet.public_subnet.id
+
+  tags = {
+    Name = "asiwko-vm-02"
   }
   
   vpc_security_group_ids = [aws_security_group.public_access.id]
