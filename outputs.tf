@@ -3,5 +3,5 @@ output "asiwko-vm-publicIP" {
 }
 
 output "asiwko-vm-id" {
-  value = [ for i in aws_instance.test: i.id ]
+  value = aws_instance.test.*.id 
 }
