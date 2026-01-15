@@ -51,7 +51,5 @@ resource "aws_instance" "test_virtual_machine" {
 
   vpc_security_group_ids = [aws_security_group.public_access.id]
   associate_public_ip_address = true
-
-  depends_on = [aws_internet_gateway.igw]
 }
 
