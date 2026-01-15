@@ -14,6 +14,7 @@ resource "aws_key_pair" "andrew_key" {
 resource "aws_security_group" "public_access" {
   name        = "allow_ssh_http_ping"
   description = "Allow Ping, SSH and HTTP inbound traffic"
+  depends_on  = [aws_vpc.main_vpc]
 
   ingress {
     from_port   = 22
