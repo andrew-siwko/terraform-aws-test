@@ -5,6 +5,10 @@ terraform {
       source  = "hashicorp/aws"
       version = "6.27.0"
     }
+    linode = {
+      source  = "linode/linode"
+      # version = "..."
+    }
   }
   # We want to store the Terraform state file in aws using an S3 bucket.
   backend "s3" {
@@ -19,4 +23,13 @@ terraform {
 provider "aws" {
   # Let's specify the region here.
   region = "us-east-1" 
+}
+
+variable "linode_token" {
+  description = "The key to the Linode API"
+  type        = string
+}
+
+provider "linode" {
+  token = var.LINODE_API_KEY
 }
