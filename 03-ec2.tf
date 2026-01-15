@@ -61,6 +61,8 @@ resource "aws_instance" "test_virtual_machine" {
   instance_type = "t3.micro"
   key_name = aws_key_pair.andrew_key.key_name
 
+  subnet_id     = aws_subnet.public_subnet.id
+
   tags = {
     Name = "asiwko-vm-01"
   }
@@ -69,3 +71,4 @@ resource "aws_instance" "test_virtual_machine" {
   associate_public_ip_address = true
 }
 
+}
