@@ -71,4 +71,3 @@ resource "aws_instance" "test_virtual_machine" {
   associate_public_ip_address = true
 }
 
-}
