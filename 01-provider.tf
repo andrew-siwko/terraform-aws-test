@@ -25,7 +25,7 @@ provider "aws" {
   region = "us-east-1" 
 }
 
-variable "linode_token" {
+variable "LINODE_API_KEY" {
   description = "The key to the Linode API"
   type        = string
 }
