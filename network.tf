@@ -30,6 +30,17 @@ resource "aws_subnet" "public_subnet" {
   }
 }
 
+resource "aws_subnet" "private_subnet" {
+  vpc_id                  = aws_vpc.main_vpc.id
+  cidr_block              = "192.168.53.0/24"
+  map_public_ip_on_launch = true
+  availability_zone       = "us-east-1a"
+
+  tags = {
+    Name = "private-subnet-01"
+  }
+}
+
 # 5. Create a Route Table
 resource "aws_route_table" "public_rt" {
   vpc_id = aws_vpc.main_vpc.id
