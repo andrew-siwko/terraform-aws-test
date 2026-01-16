@@ -44,3 +44,21 @@ resource "linode_domain_record" "aws02p_siwko_org" {
     target = aws_instance.test_virtual_machine_02.private_ip
 }
 
+
+# additional RHEL machines
+
+resource "linode_domain_record" "aws03_siwko_org" {
+    domain_id = linode_domain.siwko_org.id
+    name = "aws03"
+    record_type = "A"
+    ttl_sec = 5
+    target = aws_instance.test_virtual_machine_03.public_ip
+}
+
+resource "linode_domain_record" "aws04_siwko_org" {
+    domain_id = linode_domain.siwko_org.id
+    name = "aws04"
+    record_type = "A"
+    ttl_sec = 5
+    target = aws_instance.test_virtual_machine_04.public_ip
+}
