@@ -1,4 +1,4 @@
-This will update the dns records in my siwko.org domain for the new instances.
+# This will update the dns records in my siwko.org domain for the new instances.
 resource "linode_domain" "siwko_org" {
     type = "master"
     domain = "siwko.org"
