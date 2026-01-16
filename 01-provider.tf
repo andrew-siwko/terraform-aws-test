@@ -5,9 +5,9 @@ terraform {
       source  = "hashicorp/aws"
       version = "6.27.0"
     }
+    # in order to update DNS on linode, we'll need the linode provider.
     linode = {
       source  = "linode/linode"
-      # version = "..."
     }
   }
   # We want to store the Terraform state file in aws using an S3 bucket.

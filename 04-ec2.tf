@@ -36,6 +36,8 @@ resource "aws_instance" "test_virtual_machine_01" {
   vpc_security_group_ids = [aws_security_group.public_access.id]
   associate_public_ip_address = true
 }
+
+# The second one is always easier!
 resource "aws_instance" "test_virtual_machine_02" {
   ami           = data.aws_ami.amazon_linux.id
   instance_type = "t3.micro"
