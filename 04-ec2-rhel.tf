@@ -16,7 +16,7 @@ resource "aws_instance" "test_virtual_machine_03" {
 
 resource "aws_instance" "test_virtual_machine_04" {
   ami           = "ami-0d40a6bf9d3bfc868"
-  instance_type = "t3.micro"
+  instance_type = "m7i-flex.large"
   key_name = aws_key_pair.ssh_user_key.key_name
 
   subnet_id     = aws_subnet.public_subnet.id
