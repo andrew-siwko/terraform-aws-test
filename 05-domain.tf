@@ -8,6 +8,7 @@ resource "linode_domain" "siwko_org" {
     ttl_sec     = 300
 }
 
+# Records for the public IP addresses.
 resource "linode_domain_record" "aws01_siwko_org" {
     domain_id = linode_domain.siwko_org.id
     name = "aws01"
@@ -23,6 +24,9 @@ resource "linode_domain_record" "aws02_siwko_org" {
     ttl_sec = 5
     target = aws_instance.test_virtual_machine_02.public_ip
 }
+
+# Let's add records for the local subnet as well as for
+# the public IPs.
 
 resource "linode_domain_record" "aws01p_siwko_org" {
     domain_id = linode_domain.siwko_org.id

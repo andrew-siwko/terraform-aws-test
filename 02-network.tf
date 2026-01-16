@@ -1,4 +1,5 @@
-# 1. Create the Custom VPC
+# If we accept the default VPC, terraform may try to manipulate it and cause failures.
+# To avoid this we create our own network definition
 resource "aws_vpc" "custom_vpc" {
   cidr_block           = "192.168.52.0/23"
   enable_dns_support   = true
@@ -7,23 +8,25 @@ resource "aws_vpc" "custom_vpc" {
   tags = { Name = "custom-vpc" }
 }
 
-# 2. Create an Internet Gateway (Required for internet access)
+# We may need a gateway to route traffic out of our subnet, 
+# but note later each EC2 instance also has a public IP
 resource "aws_internet_gateway" "igw" {
   vpc_id = aws_vpc.custom_vpc.id
-
   tags = { Name = "custom-igw" }
 }
 
-# 3. Create a Public Subnet
+# I don't know why I called this a public subnet.
 resource "aws_subnet" "public_subnet" {
   vpc_id                  = aws_vpc.custom_vpc.id
   cidr_block              = "192.168.52.0/24"
-  map_public_ip_on_launch = true # Automatically assigns public IPs to instances
+  # this next line seems to "do the opposite" of what we're asking for
+  # it is very handy
+  map_public_ip_on_launch = true 
 
   tags = { Name = "public-subnet" }
 }
 
-# 4. Create a Route Table and a Route to the Internet
+# I guess it's because the subnet has an internet gateway in the route table
 resource "aws_route_table" "public_rt" {
   vpc_id = aws_vpc.custom_vpc.id
 
@@ -35,7 +38,7 @@ resource "aws_route_table" "public_rt" {
   tags = { Name = "public-route-table" }
 }
 
-# 5. Associate the Route Table with the Subnet
+# Connect the route table to the subnet.
 resource "aws_route_table_association" "public_assoc" {
   subnet_id      = aws_subnet.public_subnet.id
   route_table_id = aws_route_table.public_rt.id
