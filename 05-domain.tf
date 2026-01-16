@@ -1,7 +1,7 @@
 # This will update the dns records in my siwko.org domain for the new instances.
 resource "linode_domain" "siwko_org" {
     type = "master"
-    domain = "rvatroop466.org"
+    domain = "testdomainfortf.org"
     soa_email = "asiwko@siwko.org"
 }
 
