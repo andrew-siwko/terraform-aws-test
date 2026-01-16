@@ -24,3 +24,19 @@ resource "linode_domain_record" "aws02_siwko_org" {
     target = aws_instance.test_virtual_machine_02.public_ip
 }
 
+resource "linode_domain_record" "aws01p_siwko_org" {
+    domain_id = linode_domain.siwko_org.id
+    name = "aws01p"
+    record_type = "A"
+    ttl_sec = 5
+    target = aws_instance.test_virtual_machine_01.private_ip
+}
+
+resource "linode_domain_record" "aws02p_siwko_org" {
+    domain_id = linode_domain.siwko_org.id
+    name = "aws02p"
+    record_type = "A"
+    ttl_sec = 5
+    target = aws_instance.test_virtual_machine_02.private_ip
+}
+
