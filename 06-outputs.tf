@@ -14,3 +14,10 @@ output "asiwko-vm-public-ip_02" {
   value = aws_instance.test_virtual_machine_02.public_ip
 }
 
+output "asiwko-vm-public-ip_03" {
+  value = aws_instance.test_virtual_machine_03.public_ip
+}
+output "asiwko-vm-public-ip_04" {
+  value = aws_instance.test_virtual_machine_04.public_ip
+}
+
