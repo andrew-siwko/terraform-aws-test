@@ -3,6 +3,9 @@ resource "linode_domain" "siwko_org" {
     type = "master"
     domain = "siwko.org"
     soa_email = "asiwko@siwko.org"
+    refresh_sec = 300
+    retry_sec   = 300
+    ttl_sec     = 300
 }
 
 resource "linode_domain_record" "aws01_siwko_org" {
