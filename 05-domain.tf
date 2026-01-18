@@ -7,7 +7,8 @@ resource "linode_domain" "siwko_org" {
     retry_sec   = 300
     ttl_sec     = 300
 }
-
+# command to import the domain
+# terraform import linode_domain.siwko_org 1228113
 # Records for the public IP addresses.
 resource "linode_domain_record" "aws01_siwko_org" {
     domain_id = linode_domain.siwko_org.id
