@@ -7,6 +7,14 @@ output "asiwko-vm-id-02" {
   value = aws_instance.test_virtual_machine_02.*
 }
 
+output "asiwko-vm-id-03" {
+  value = aws_instance.test_virtual_machine_02.*
+}
+
+output "asiwko-vm-id-04" {
+  value = aws_instance.test_virtual_machine_02.*
+}
+
 output "asiwko-vm-public-ip_01" {
   value = aws_instance.test_virtual_machine_01.public_ip
 }
