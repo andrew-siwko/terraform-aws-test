@@ -13,7 +13,7 @@ data "aws_ami" "amazon_linux" {
 # which will allow ssh key login to the instance
 resource "aws_key_pair" "ssh_user_key" {
   key_name   = "user-key"
-  public_key = file("/container_shared/ansible/id_ed25519.desktop.pub")
+  public_key = file("/container_shared/ansible/id_rsa.desktop.pub")
 }
 
 # This block defines the EC2 instance.  The AMI refers to the image to use as selected above.
