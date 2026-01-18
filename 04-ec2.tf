@@ -11,7 +11,7 @@ data "aws_ami" "amazon_linux" {
 
 # This key will be added to the authorized keys for the ec2-user account
 # which will allow ssh key login to the instance
-resource "aws_key_pair" "ssh_user_key" {
+resource "aws_key_pair" "ssh_authorized_key" {
   key_name   = "user-key"
   public_key = file("/container_shared/ansible/id_rsa.desktop.pub")
 }
@@ -25,7 +25,7 @@ resource "aws_key_pair" "ssh_user_key" {
 resource "aws_instance" "test_virtual_machine_01" {
   ami           = data.aws_ami.amazon_linux.id
   instance_type = "t3.micro"
-  key_name = aws_key_pair.ssh_user_key.key_name
+  key_name = aws_key_pair.ssh_authorized_key.key_name
 
   subnet_id     = aws_subnet.public_subnet.id
 
@@ -41,7 +41,7 @@ resource "aws_instance" "test_virtual_machine_01" {
 resource "aws_instance" "test_virtual_machine_02" {
   ami           = data.aws_ami.amazon_linux.id
   instance_type = "t3.micro"
-  key_name = aws_key_pair.ssh_user_key.key_name
+  key_name = aws_key_pair.ssh_authorized_key.key_name
 
   subnet_id     = aws_subnet.public_subnet.id
 
@@ -57,7 +57,7 @@ resource "aws_instance" "test_virtual_machine_02" {
 resource "aws_instance" "test_virtual_machine_03" {
   ami           = "ami-0d40a6bf9d3bfc868"
   instance_type = "m7i-flex.large"
-  key_name = aws_key_pair.ssh_user_key.key_name
+  key_name = aws_key_pair.ssh_authorized_key.key_name
 
   subnet_id     = aws_subnet.public_subnet.id
 
@@ -72,7 +72,7 @@ resource "aws_instance" "test_virtual_machine_03" {
 resource "aws_instance" "test_virtual_machine_04" {
   ami           = "ami-0d40a6bf9d3bfc868"
   instance_type = "m7i-flex.large"
-  key_name = aws_key_pair.ssh_user_key.key_name
+  key_name = aws_key_pair.ssh_authorized_key.key_name
 
   subnet_id     = aws_subnet.public_subnet.id
 
