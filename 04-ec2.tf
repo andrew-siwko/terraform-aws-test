@@ -77,7 +77,7 @@ resource "aws_instance" "test_virtual_machine_04" {
   subnet_id     = aws_subnet.public_subnet.id
 
   tags = {
-    Name = "asiwko-vm-03"
+    Name = "asiwko-vm-04"
   }
   
   vpc_security_group_ids = [aws_security_group.public_access.id]
