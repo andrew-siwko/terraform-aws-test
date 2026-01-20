@@ -12,7 +12,7 @@ data "aws_ami" "amazon_linux" {
 # This key will be added to the authorized keys for the ec2-user account
 # which will allow ssh key login to the instance
 resource "aws_key_pair" "ssh_authorized_key" {
-  key_name   = "user-key"
+  key_name   = "ansible-user-key"
   public_key = file("/container_shared/ansible/ansible_rsa.pub")
 }
 
