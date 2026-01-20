@@ -23,8 +23,11 @@ resource "aws_key_pair" "ssh_authorized_key" {
 # The subnet connects the instance to the network we defined.  If we allow the default vpc
 # there is a danger that Terraform will try to delete the default VPC and fail after timing out.
 resource "aws_instance" "test_virtual_machine_01" {
-  ami           = data.aws_ami.amazon_linux.id
-  instance_type = "t3.micro"
+  ami           = "ami-0d40a6bf9d3bfc868"
+  # ami           = data.aws_ami.amazon_linux.id
+  # instance_type = "t3.micro"
+  instance_type = "m7i-flex.large"
+
   key_name = aws_key_pair.ssh_authorized_key.key_name
 
   subnet_id     = aws_subnet.public_subnet.id
@@ -39,8 +42,10 @@ resource "aws_instance" "test_virtual_machine_01" {
 
 # The second one is always easier!
 resource "aws_instance" "test_virtual_machine_02" {
-  ami           = data.aws_ami.amazon_linux.id
-  instance_type = "t3.micro"
+  ami           = "ami-0d40a6bf9d3bfc868"
+  # ami           = data.aws_ami.amazon_linux.id
+  # instance_type = "t3.micro"
+    instance_type = "m7i-flex.large"
   key_name = aws_key_pair.ssh_authorized_key.key_name
 
   subnet_id     = aws_subnet.public_subnet.id
