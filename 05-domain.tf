@@ -29,6 +29,6 @@ resource "linode_domain_record" "aws01p_siwko_org" {
     name = "aws01p"
     record_type = "A"
     ttl_sec = 5
-    target = aws_instance.test_virtual_machine_01.private_ip
+    target = aws_instance.virtual_machine_01.private_ip
 }
 
