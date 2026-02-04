@@ -1,11 +1,12 @@
 # Andrew's Multicloud Terraform Experiment
 ## Goal
-The goal of this repo is to create a usable VM in the AWS cloud.
-Everything here was done using the AWS free trial.
-After this step completed I used ansible to configure and install Tomcat and run a sample application.
+The goal of this repo is to create a usable VM in the AWS cloud.<br/>
+Everything here was done using the AWS free trial.<br/>
+After this step completed I used Ansible to configure and install Tomcat and run a sample application.  [More on that later...](https://github.com/andrew-siwko/ansible-multi-cloud-tomcat-hello)<br/>
+It all starts with the [Cloud Console](https://aws.amazon.com/).
 
 ## Multicloud
-I tried to build the same basic structures in each of the cloud environments.  Each one starts with a providers, lays out the network and security, creates the VM and then registers the public IP in my DNS.  There is some variability which has been interesting to study.
+I tried to build the same basic structures in each of the cloud environments.  Each one starts with providers (and a backend), lays out the network and security, creates the VM and then registers the public IP in my DNS.  There is some variability which has been interesting to study.  The Terraform state file is stored on each provider.
 * Step 1 - [AWS](https://github.com/andrew-siwko/terraform-aws-test) (you are here)
 * Step 2 - [Azure](https://github.com/andrew-siwko/terraform-azure-test)
 * Step 3 - [GCP](https://github.com/andrew-siwko/terraform-gcp-test)
@@ -19,8 +20,27 @@ I stood up my own Jenkins server and built two freestyle jobs to support the Ter
 * terraform apply -auto-approve
 * terraform output (This is piped to mail so I get an e-mail with the outputs.)
 
-Yes, I know plan and apply should be separate and intentional.  In this case I found defects in planwhich halted the job before apply.  I also commented out apply untuil plan was pretty close to working.
-The Jenkins job contains environment variables with authentication information for the cloud environment and Linode (my registrar).
-
+Yes, I know plan and apply should be separate and intentional.  In this case I found defects in plan which halted the job before apply.  That was useful.  I also commented out apply until plan was pretty close to working.<br/>
+The first Jenkins job contains environment variables with authentication information for the cloud environment and [Linode](https://www.linode.com/) (my registrar).<br/>
 The second Jenkins job imports my DNS zone.  I run it only once after the plan is complete.  After that Terraform happily manages records in my existing zone.
 
+## Observations
+* This was my very first Terraform experience and my first cloud provider.  
+* I know that Terraform handles dependencies but I developed a crude file naming scheme to keep my deployment tasks ordered in my mind and VSCode.
+* The aws cli installed easily and was critical to success.
+* I had to create the bucket with the cli as I did not know how to do that with Terraform.
+* I had trouble selecting the image and instance type.  Only certain instances were allowed on the free plan.  I used the cli to search and started with t3.micro.
+* At the beginning of this project I wanted to create multiple nodes.  I think I had 4 VMs at the beginning.  Once I hit the limits of the free plan and had a similar experience with Microsoft, I cut the project back to a single instance.
+* I settled on m7i-flex.large after I ran out of memory while provisioning with Ansible.
+* I had an issue with the default VPC.  If I did not define a unique VPC, Terraform would try to destory the default every time it detroyed and rebuilt the instance.  This hung the Terraform job.
+* The admin user is ec2-user.  
+* The AWS console was fairly simple to use but there were so many options, it was hard to focus on the job at hand.
+* Amazon was in the process of adding MFA which was cumbersome to use.  I added MFA using Chrome (Google Password Manager?) on a Linux laptop and when I got back to Windows I had to fall back to e-mail authentication.
+* I spent about 2 weeks getting the whole project working.
+  * Start: 2026-01-14
+  * Functional: 2026-01-28
+  * Number of Jenkins builds to success: 80
+  * Hurdles: 
+    * This was my first time using Terraform and doing cloud deployments.
+    * Finding the right image
+    * default VPC (my error)
