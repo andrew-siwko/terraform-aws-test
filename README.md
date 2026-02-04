@@ -33,7 +33,7 @@ The second Jenkins job imports my DNS zone.  I run it only once after the plan i
 * At the beginning of this project I wanted to create multiple nodes.  I think I had 4 VMs at the beginning.  Once I hit the limits of the free plan and had a similar experience with Microsoft, I cut the project back to a single instance.
 * I settled on m7i-flex.large after I ran out of memory while provisioning with Ansible.
 * I had an issue with the default VPC.  If I did not define a unique VPC, Terraform would try to destory the default every time it detroyed and rebuilt the instance.  This hung the Terraform job.
-* The admin user is ec2-user.  
+* The admin user is ec2-user.  I observed that I could change the authorized key in Terraform but only recreating the instance would update the key.
 * The AWS console was fairly simple to use but there were so many options, it was hard to focus on the job at hand.
 * Amazon was in the process of adding MFA which was cumbersome to use.  I added MFA using Chrome (Google Password Manager?) on a Linux laptop and when I got back to Windows I had to fall back to e-mail authentication.
 * I spent about 2 weeks getting the whole project working.
