@@ -2,7 +2,7 @@
 # Goal
 The goal of this repo is to create a usable VM in the AWS cloud.
 Everything here was done using the AWS free trial.
-After this step completed I uses ansible to configure and install Tomcat and run a sample application.
+After this step completed I used ansible to configure and install Tomcat and run a sample application.
 
 # Multicloud
 I tried to build the same basic structures in each of the cloud environments.  Each one starts with a providers, lays out the network and security, creates the VM and then registers the public IP in my DNS.  There is some variability which has been interesting to study.
