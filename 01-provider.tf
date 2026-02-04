@@ -16,12 +16,10 @@ terraform {
     key = "dev/asiwko/terraform.tfstate"
     encrypt = true
     region = "us-east-1"
-    #dynamodb_table = "asiwko-tf-locks"
   }
 }
 
 provider "aws" {
-  # Let's specify the region here.
   region = "us-east-1" 
 }
 
