@@ -17,7 +17,7 @@ resource "linode_domain" "dns_zone" {
 
 # one record for the virtual machine
 resource "linode_domain_record" "aws01_siwko_org" {
-  domain_id   = linode_domain.siwko_org.id
+  domain_id   = linode_domain.dns_zone.id
   name        = "aws01"
   record_type = "A"
   ttl_sec     = 5

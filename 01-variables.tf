@@ -5,15 +5,15 @@ variable "LINODE_API_KEY" {
 }
 
 variable "instance_region" {
-  description = "The region to create the Linode instance"
+  description = "The region to create the instance"
   type        = string
-  default     = "us-southeast"
+  default     = "us-east-1"
 }
 
 variable "instance_type" {
   description = "Which instance type to create"
   type    = string
-  default = "g6-nanode-1"
+  default = "m7i-flex.large"
 }
 
 variable "domain_name" {

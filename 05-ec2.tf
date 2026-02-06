@@ -17,7 +17,7 @@ resource "aws_key_pair" "ssh_authorized_key" {
 # there is a danger that Terraform will try to delete the default VPC and fail after timing out.
 resource "aws_instance" "virtual_machine_01" {
   ami           = "ami-0d40a6bf9d3bfc868"
-  instance_type = "m7i-flex.large"
+  instance_type = var.instance_type
 
   key_name = aws_key_pair.ssh_authorized_key.key_name
 

@@ -20,12 +20,7 @@ terraform {
 }
 
 provider "aws" {
-  region = "us-east-1" 
-}
-
-variable "LINODE_API_KEY" {
-  description = "The key to the Linode API"
-  type        = string
+  region = var.instance_region 
 }
 
 provider "linode" {
