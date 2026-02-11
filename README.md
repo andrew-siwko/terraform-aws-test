@@ -46,6 +46,7 @@ fi
 * The AWS console was fairly simple to use but there were so many options, it was hard to focus on the job at hand.
 * Amazon was in the process of adding MFA which was cumbersome to use.  I added MFA using Chrome (Google Password Manager?) on a Linux laptop and when I got back to Windows I had to fall back to e-mail authentication.
 * I spent about 2 weeks getting the whole project working.
+* Project stats:
   * Start: 2026-01-14
   * Functional: 2026-01-28
   * Number of Jenkins builds to success: 80
