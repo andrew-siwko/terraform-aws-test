@@ -10,7 +10,7 @@ resource "aws_key_pair" "ssh_authorized_key" {
 
 # This block defines the EC2 instance.  The AMI refers to the image to use as selected above.
 # This was tested on a free account.  Only certain insnances are permitted on a free account.
-# I searched for these with the aws cli and found t3.micro is allowed.
+# I searched for these with the AWS cli and found t3.micro is allowed.
 # RHEL ran out of memory runnung ansible on this so I updated to m7i-flex.large
 # The key pulls in the key_pair above for ssh login.
 # The subnet connects the instance to the network we defined.  If we allow the default vpc
