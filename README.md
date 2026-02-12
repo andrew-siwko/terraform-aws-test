@@ -42,16 +42,7 @@ I stood up my own Jenkins server and built a freestyle job to support the Terraf
 * terraform apply -auto-approve
 * terraform output (This is piped to mail so I get an e-mail with the outputs.)
 
-The Jenkins job contains environment variables with authentication information for the cloud environment and [Linode](https://www.linode.com/) my DNS registrar.<br/>
-Here's the actual code to import the DNS zone if it is not in the Terraform state file.
-```bash
-if ! terraform state list | grep -q "linode_domain.dns_zone"; then
-  echo "Resource not in state. Importing..."
-  terraform import linode_domain.dns_zone 3417841
-else
-  echo "Domain already managed. Skipping import."
-fi
-```
+The Jenkins job contains environment variables with authentication information for the cloud environment and [Linode](https://www.linode.com/) my DNS registrar.
 The zone resource has to be in terraform to attach the A record for the newly created VM.  Note that the zone resource is marked as "prevent_destroy" in order to stop Terraform from destroying the entire domain zone.
 
 ## Observations
