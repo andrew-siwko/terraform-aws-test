@@ -1,4 +1,13 @@
-data "aws_ec2_instance_types" "available" {
+data "aws_ec2_instance_types" "discovery" {
+  filter {
+    name   = "current-generation"
+    values = ["true"]
+  }
+}
+
+data "aws_ec2_instance_type" "details" {
+  for_each      = toset(data.aws_ec2_instance_types.discovery.instance_types)
+  instance_type = each.value
 }
 
 output "supported_types" {
