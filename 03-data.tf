@@ -3,7 +3,11 @@ data "aws_ec2_instance_types" "discovery" {
     name   = "current-generation"
     values = ["true"]
   }
-}
+    filter {
+        name = "cpuArchitecture"
+        values = ["x86_64"]
+    }
+  }
 
 data "aws_ec2_instance_type" "details" {
   for_each      = toset(data.aws_ec2_instance_types.discovery.instance_types)
