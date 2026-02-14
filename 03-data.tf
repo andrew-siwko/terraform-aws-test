@@ -4,7 +4,7 @@ data "aws_ec2_instance_types" "discovery" {
     values = ["true"]
   }
     filter {
-        name = "cpuArchitecture"
+        name = "processor-info.supported-architecture"
         values = ["x86_64"]
     }
   }
@@ -34,13 +34,11 @@ output "all_region_names" {
   value = data.aws_regions.available
 }
 
-
 data "aws_ami" "rhel9" {
   most_recent = true
   owners      = ["309956199498"] # Official Red Hat Owner ID
 
 }
-
 
 output "RHEL_images" {
   value = {
