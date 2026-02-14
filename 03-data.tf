@@ -9,7 +9,7 @@ output "supported_types" {
 data "aws_regions" "available" {}
 
 output "all_region_names" {
-  value = data.aws_regions.available.names
+  value = data.aws_regions.available
 }
 
 
@@ -25,6 +25,15 @@ output "RHEL_images" {
     for ami in [data.aws_ami.rhel9] : ami.name => {
       id           = ami.id
       architecture = ami.architecture
+    }
+  }
+}
+
+output "instance_types" {
+  value = {
+    for type in [data.aws_ec2_instance_types.available] : type.name => {
+      id           = type.id
+    #   architecture = ami.architecture
     }
   }
 }
