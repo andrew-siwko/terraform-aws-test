@@ -21,5 +21,10 @@ data "aws_ami" "rhel9" {
 
 
 output "RHEL_images" {
-  value = data.aws_ami.rhel9
+  value = {
+    for ami in [data.aws_ami.rhel9] : ami.name => {
+      id           = ami.id
+      architecture = ami.architecture
+    }
+  }
 }
