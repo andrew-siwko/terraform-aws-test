@@ -47,11 +47,11 @@ output "RHEL_images" {
   }
 }
 
-output "instance_types" {
-  value = {
-    for type in [data.aws_ec2_instance_types.available] : type.name => {
-      id           = type.id
-    #   architecture = ami.architecture
-    }
-  }
-}
+# output "instance_types" {
+#   value = {
+#     for type in [data.aws_ec2_instance_types.available] : type.name => {
+#       id           = type.id
+#     #   architecture = ami.architecture
+#     }
+#   }
+# }
