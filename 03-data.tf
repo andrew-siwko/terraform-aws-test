@@ -21,7 +21,7 @@ data "aws_ec2_instance_type" "details" {
 output "instance_catalog" {
   value = {
     for type, details in data.aws_ec2_instance_type.details : type => {
-      arch = details.supported_architectures
+      arch = join(", ", details.supported_architectures)
       vcpus = details.default_vcpus
       mem_gb = details.memory_size / 1024
     }
