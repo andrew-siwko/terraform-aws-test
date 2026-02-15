@@ -8,7 +8,7 @@ data "aws_ec2_instance_types" "discovery" {
         values = ["x86_64"]
     }
     filter {
-        name = "bare_metal"
+        name = "bare-metal"
         values = ["false"]
     }
   }
