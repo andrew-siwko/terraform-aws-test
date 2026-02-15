@@ -7,6 +7,10 @@ data "aws_ec2_instance_types" "discovery" {
         name = "processor-info.supported-architecture"
         values = ["x86_64"]
     }
+    filter {
+        name = "bare_metal"
+        values = ["false"]
+    }
   }
 
 data "aws_ec2_instance_type" "details" {
@@ -20,8 +24,10 @@ data "aws_ec2_instance_type" "details" {
 output "filtered_lab_instances" {
   value = {
     for type, details in data.aws_ec2_instance_type.details : type => {
-      mem_gb = details.memory_size / 1024
-      vcpus  = details.default_vcpus
+      mem_gb     = details.memory_size / 1024
+      vcpus      = details.default_vcpus
+      arch       = join(", ", details.supported_architectures)
+      storage_gb = details.total_instance_storage
     }
     if details.memory_size <= 16384 && details.default_vcpus <= 4
   }
