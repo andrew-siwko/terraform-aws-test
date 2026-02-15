@@ -11,6 +11,10 @@ data "aws_ec2_instance_types" "discovery" {
         name = "bare-metal"
         values = ["false"]
     }
+    filter {
+        name   = "vcpu-info.default-vcpus"
+        values = ["1", "2"]
+    }
   }
 
 data "aws_ec2_instance_type" "details" {
