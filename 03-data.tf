@@ -37,7 +37,7 @@ output "filtered_lab_instances" {
   value = [
     for type, details in data.aws_ec2_instance_type.details:
     format("%s: mem_gb=%v, vcpus=%v", type, details.memory_size / 1024, details.default_vcpus)
-    if details.memory_size <= 8192 && details.default_vcpus <= 2
+    if details.memory_size <= 1024 && details.default_vcpus <= 2
   ]
 }
 
