@@ -17,16 +17,24 @@ data "aws_ec2_instance_type" "details" {
 # output "supported_types" {
 #   value = data.aws_ec2_instance_types.available.instance_types
 # }
-
-output "instance_catalog" {
+output "filtered_lab_instances" {
   value = {
     for type, details in data.aws_ec2_instance_type.details : type => {
-      arch = join(", ", details.supported_architectures)
-      vcpus = details.default_vcpus
       mem_gb = details.memory_size / 1024
+      vcpus  = details.default_vcpus
     }
+    if details.memory_size <= 16384 && details.default_vcpus <= 4
   }
 }
+# output "instance_catalog" {
+#   value = {
+#     for type, details in data.aws_ec2_instance_type.details : type => {
+#       arch = join(", ", details.supported_architectures)
+#       vcpus = details.default_vcpus
+#       mem_gb = details.memory_size / 1024
+#     }
+#   }
+# }
 
 data "aws_regions" "available" {}
 
