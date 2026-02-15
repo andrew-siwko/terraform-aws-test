@@ -67,13 +67,10 @@ data "aws_ami" "redhat_details" {
   }
 }
 output "redhat_images" {
-  value = {
-    for ami in data.aws_ami.redhat_details : ami.name => {
-      id           = ami.id
-    #   architecture = ami.architecture
-    #   description = ami.description
-    }
-  }
+  value = [
+    for ami in data.aws_ami.redhat_details:
+    format("%s: %s", ami.name, ami.id)
+  ]
 }
 # output "instance_types" {
 #   value = {
