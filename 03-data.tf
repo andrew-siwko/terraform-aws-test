@@ -48,3 +48,12 @@ output "redhat_images" {
     if strcontains(ami.name,"9.7")
   ])
 }
+
+locals {
+  rhel_97_ids = [
+    for ami in data.aws_ami.redhat_details : ami.id
+    if strcontains(ami.name, "9.7")
+  ]
+
+  target_ami_id = local.rhel_97_ids[0]
+}
