@@ -16,7 +16,8 @@ resource "aws_key_pair" "ssh_authorized_key" {
 # The subnet connects the instance to the network we defined.  If we allow the default vpc
 # there is a danger that Terraform will try to delete the default VPC and fail after timing out.
 resource "aws_instance" "virtual_machine_01" {
-  ami           = "ami-0d40a6bf9d3bfc868"
+  # ami           = "ami-0d40a6bf9d3bfc868"
+  ami           = local.target_ami_id
   instance_type = var.instance_type
 
   key_name = aws_key_pair.ssh_authorized_key.key_name
