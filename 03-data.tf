@@ -3,19 +3,23 @@ data "aws_ec2_instance_types" "discovery" {
     name   = "current-generation"
     values = ["true"]
   }
-    filter {
-        name = "processor-info.supported-architecture"
-        values = ["x86_64"]
-    }
-    filter {
-        name = "bare-metal"
-        values = ["false"]
-    }
-    filter {
-        name   = "vcpu-info.default-vcpus"
-        values = ["1", "2"]
-    }
+  filter {
+    name = "processor-info.supported-architecture"
+    values = ["x86_64"]
   }
+  filter {
+    name = "bare-metal"
+    values = ["false"]
+  }
+  filter {
+    name   = "vcpu-info.default-vcpus"
+    values = ["1", "2"]
+  }
+  filter {
+    name   = "free-tier-eligible"
+    values = ["true"]
+  }
+}
 
 data "aws_ec2_instance_type" "details" {
   for_each      = toset(data.aws_ec2_instance_types.discovery.instance_types)
