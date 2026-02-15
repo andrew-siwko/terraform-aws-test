@@ -26,8 +26,8 @@ output "filtered_lab_instances" {
     for type, details in data.aws_ec2_instance_type.details : type => {
       mem_gb     = details.memory_size / 1024
       vcpus      = details.default_vcpus
-      arch       = join(", ", details.supported_architectures)
-      storage_gb = details.total_instance_storage
+    #   arch       = join(", ", details.supported_architectures)
+    #   storage_gb = details.total_instance_storage
     }
     if details.memory_size <= 16384 && details.default_vcpus <= 4
   }
@@ -67,8 +67,8 @@ output "redhat_images" {
   value = {
     for ami in data.aws_ami.redhat_details : ami.name => {
       id           = ami.id
-      architecture = ami.architecture
-      description = ami.description
+    #   architecture = ami.architecture
+    #   description = ami.description
     }
   }
 }
