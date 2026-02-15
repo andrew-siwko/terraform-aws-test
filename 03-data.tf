@@ -33,6 +33,11 @@ output "filtered_lab_instances" {
 data "aws_ami_ids" "redhat_ids" {
   owners      = ["309956199498"] # Official Red Hat Owner ID
   filter {
+    name   = "name"
+    # Matches any RHEL 9.7 image for x86 architecture
+    values = ["RHEL-9.7*"]
+  }
+  filter {
     name   = "architecture"
     values = ["x86_64"]
   }
