@@ -50,6 +50,10 @@ output "all_region_names" {
 
 data "aws_ami_ids" "redhat_ids" {
   owners      = ["309956199498"] # Official Red Hat Owner ID
+  filter {
+    name   = "architecture"
+    values = ["x86_64"]
+  }
 }
 
 data "aws_ami" "redhat_details" {
@@ -65,11 +69,6 @@ output "redhat_images" {
       id           = ami.id
       architecture = ami.architecture
       description = ami.description
-      root_device_type   = ami.root_device_type   # e.g., "ebs"
-      root_storage_gb = [
-        for mapping in ami.block_device_mappings : 
-        mapping.ebs.volume_size if mapping.device_name == ami.root_device_name
-      ][0]
     }
   }
 }
