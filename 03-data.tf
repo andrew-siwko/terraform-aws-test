@@ -51,12 +51,6 @@ output "filtered_lab_instances" {
 #   }
 # }
 
-data "aws_regions" "available" {}
-
-output "all_region_names" {
-  value = data.aws_regions.available
-}
-
 data "aws_ami_ids" "redhat_ids" {
   owners      = ["309956199498"] # Official Red Hat Owner ID
   filter {
