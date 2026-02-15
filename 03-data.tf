@@ -70,6 +70,7 @@ output "redhat_images" {
   value = [
     for ami in data.aws_ami.redhat_details:
     format("%s: %s", ami.name, ami.id)
+    if strcontains(ami.name,"9.7")
   ]
 }
 # output "instance_types" {
