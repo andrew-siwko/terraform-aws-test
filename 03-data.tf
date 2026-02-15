@@ -34,21 +34,25 @@ output "all_region_names" {
   value = data.aws_regions.available
 }
 
-data "aws_ami" "rhel9" {
-  most_recent = true
+data "aws_ami_ids" "redhat_ids" {
   owners      = ["309956199498"] # Official Red Hat Owner ID
-
 }
 
-output "RHEL_images" {
+data "aws_ami" "redhat_details" {
+  for_each = toset(data.aws_ami_ids.redhat_ids.ids)
+  filter {
+    name   = "image-id"
+    values = [each.value]
+  }
+}
+output "redhat_images" {
   value = {
-    for ami in [data.aws_ami.rhel9] : ami.name => {
+    for ami in data.aws_ami.redhat_details : ami.name => {
       id           = ami.id
       architecture = ami.architecture
     }
   }
 }
-
 # output "instance_types" {
 #   value = {
 #     for type in [data.aws_ec2_instance_types.available] : type.name => {
