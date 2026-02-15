@@ -64,6 +64,10 @@ output "redhat_images" {
     for ami in data.aws_ami.redhat_details : ami.name => {
       id           = ami.id
       architecture = ami.architecture
+      root_storage_gb = [
+        for mapping in ami.block_device_mappings : 
+        mapping.ebs.volume_size if mapping.device_name == ami.root_device_name
+      ][0]
     }
   }
 }
