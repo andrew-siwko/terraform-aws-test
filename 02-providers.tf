@@ -10,13 +10,19 @@ terraform {
       source  = "linode/linode"
     }
   }
-  # We want to store the Terraform state file in aws using an S3 bucket.
-  backend "s3" {
-    bucket = "asiwko-terraform-state-bucket"
-    key = "dev/asiwko/terraform.tfstate"
-    encrypt = true
-    region = "us-east-1"
+
+   backend "local" {
+    path = "/container_shared/tfstate/aws.tfstate"
   }
+
+  # This project started with the state stored in the provider's oject storage.  
+  # I moved it to local storage as providers charge for object storage and there was no benefit once the exercise was complete.
+  # backend "s3" {
+  #   bucket = "asiwko-terraform-state-bucket"
+  #   key = "dev/asiwko/terraform.tfstate"
+  #   encrypt = true
+  #   region = "us-east-1"
+  # }
 }
 
 provider "aws" {
