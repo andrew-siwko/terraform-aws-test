@@ -3,7 +3,6 @@ terraform {
     # We will be working with AWS and so will need the AWS provider
     aws = {
       source  = "hashicorp/aws"
-      version = "6.27.0"
     }
     # in order to update DNS on linode, we'll need the linode provider.
     linode = {
